@@ -1,0 +1,14 @@
+name: Activity-Box
+  on:
+    schedule:
+      - cron: "0 0 * * *"
+    workflow_dispatch:
+  jobs:
+    build:
+      runs-on: ubuntu-latest
+      steps:
+        - uses: actions/checkout@v4
+        - uses: JasonEtco/activity-box@master
+          env:
+            GH_TOKEN: ${{ secrets.GH_TOKEN }}
+            GIST_ID: a1842a1ebb50bcdbba78b28a38a9cb2d
