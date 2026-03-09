@@ -24,6 +24,22 @@ const serializers = {
     return `${line} PR #${item.payload.pull_request.number} in ${
       item.repo.name
     }`
+  },
+  PushEvent: item => {
+    const count = item.payload.size
+    return `⬆️ Pushed ${count} commit${count > 1 ? 's' : ''} to ${item.repo.name}`
+  },
+  CreateEvent: item => {
+    if (item.payload.ref_type === 'repository') {
+      return `📦 Created repository ${item.repo.name}`
+    }
+    return `🌿 Created ${item.payload.ref_type} ${item.payload.ref} in ${item.repo.name}`
+  },
+  ForkEvent: item => {
+    return `🍴 Forked ${item.repo.name}`
+  },
+  WatchEvent: item => {
+    return `⭐ Starred ${item.repo.name}`
   }
 }
 
