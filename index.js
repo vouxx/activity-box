@@ -26,7 +26,7 @@ const serializers = {
     }`
   },
   PushEvent: item => {
-    const count = item.payload.size
+    const count = item.payload.size || item.payload.commits.length || 1
     return `⬆️ Pushed ${count} commit${count > 1 ? 's' : ''} to ${item.repo.name}`
   },
   CreateEvent: item => {
