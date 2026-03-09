@@ -2,15 +2,13 @@
   on:
     schedule:
       - cron: "0 0 * * *"
-    push:
-      branches: master
+    workflow_dispatch:
   jobs:
     build:
       runs-on: ubuntu-latest
       steps:
         - uses: actions/checkout@v4
-        - run: npm install
-        - run: node index.js
+        - uses: JasonEtco/activity-box@master
           env:
             GH_TOKEN: ${{ secrets.GH_TOKEN }}
             GIST_ID: a1842a1ebb50bcdbba78b28a38a9cb2d
