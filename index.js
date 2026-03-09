@@ -58,15 +58,13 @@ Toolkit.run(
     )
 
     const content = events.data
-      // Filter out any boring activity
       .filter(event => serializers.hasOwnProperty(event.type))
-      // We only have five lines to work with
       .slice(0, MAX_LINES)
-      // Call the serializer to construct a string
-      .map(item => serializers[item.type](item))
-      // Truncate if necessary
+      .map(item => {
+        try { return serializers[item.type](item) }
+        catch { return `📌 ${item.type} in ${item.repo.name}` }
+      })
       .map(truncate)
-      // Join items to one string
       .join('\n')
 
     const box = new GistBox({ id: GIST_ID, token: GH_PAT })
