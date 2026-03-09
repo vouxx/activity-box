@@ -8,7 +8,8 @@
       runs-on: ubuntu-latest
       steps:
         - uses: actions/checkout@v4
-        - uses: JasonEtco/activity-box@master
+        - run: npm install
+        - run: node index.js
           env:
             GH_TOKEN: ${{ secrets.GH_TOKEN }}
             GIST_ID: a1842a1ebb50bcdbba78b28a38a9cb2d
